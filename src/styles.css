@@ -12,10 +12,20 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  height: 100%;
 }
 
 button,
@@ -27,7 +37,8 @@ input {
 .app-layout {
   display: grid;
   grid-template-columns: minmax(360px, 430px) minmax(0, 1fr);
-  min-height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -37,6 +48,7 @@ input {
   padding: 32px;
   background: #fbfaf7;
   border-right: 1px solid #ddd7ca;
+  min-height: 0;
   overflow: auto;
 }
 
@@ -71,6 +83,14 @@ h2 {
   color: #18231c;
   font-size: 1.35rem;
   line-height: 1.2;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin: 0;
+  color: #263229;
+  font-size: 0.95rem;
+  line-height: 1.25;
   letter-spacing: 0;
 }
 
@@ -186,29 +206,52 @@ input:focus-visible {
   text-transform: uppercase;
 }
 
-.info-row {
-  display: grid;
-  gap: 4px;
-  color: #4d594f;
+.location-line {
+  color: #667064;
   font-size: 0.95rem;
-}
-
-.info-row span {
-  font-weight: 750;
-}
-
-.info-row strong {
-  color: #17211b;
   font-weight: 650;
 }
 
-.species-list {
+.quick-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.fact {
+  display: grid;
+  gap: 3px;
+  min-height: 62px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ebe6dc;
+  color: #4d594f;
+  align-content: center;
+}
+
+.fact span {
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.fact strong {
+  color: #17211b;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.detail-section {
+  display: grid;
+  gap: 8px;
+}
+
+.tag-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.species-list span {
+.tag-list span {
   padding: 8px 10px;
   border-radius: 999px;
   background: #dfe9df;
@@ -217,15 +260,53 @@ input:focus-visible {
   font-weight: 650;
 }
 
+.tag-list.neutral span {
+  background: #ebe6dc;
+  color: #303a33;
+}
+
+.info-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.info-list div {
+  display: grid;
+  gap: 3px;
+}
+
+.info-list dt {
+  color: #303a33;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.info-list dd {
+  margin: 0;
+  color: #4d594f;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.data-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #667064;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
 .map-area {
   position: relative;
-  min-height: 100vh;
+  min-height: 0;
+  height: 100dvh;
 }
 
 .map-shell {
   width: 100%;
   height: 100%;
-  min-height: 100vh;
 }
 
 .leaflet-container {
@@ -267,8 +348,15 @@ input:focus-visible {
 }
 
 @media (max-width: 860px) {
+  body {
+    overflow: auto;
+  }
+
   .app-layout {
     grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
   }
 
   .sidebar {
@@ -279,6 +367,7 @@ input:focus-visible {
 
   .map-area,
   .map-shell {
+    height: 62vh;
     min-height: 62vh;
   }
 }
