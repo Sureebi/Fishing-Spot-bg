@@ -118,7 +118,8 @@ h3 {
   font-weight: 700;
 }
 
-select {
+select,
+input[type='search'] {
   width: 100%;
   min-height: 44px;
   padding: 0 12px;
@@ -126,6 +127,10 @@ select {
   background: #ffffff;
   border: 1px solid #c9c2b4;
   border-radius: 8px;
+}
+
+input[type='search']::placeholder {
+  color: #7a8278;
 }
 
 select:focus,
@@ -210,6 +215,12 @@ input:focus-visible {
   color: #667064;
   font-size: 0.95rem;
   font-weight: 650;
+}
+
+.access-point-name {
+  color: #315d43;
+  font-size: 1rem;
+  font-weight: 800;
 }
 
 .quick-facts {

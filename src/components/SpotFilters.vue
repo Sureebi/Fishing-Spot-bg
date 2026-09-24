@@ -11,6 +11,17 @@ defineEmits<{
 <template>
   <section class="controls" aria-label="Филтри и случаен избор">
     <div class="control-group">
+      <label for="spot-search">Търсене</label>
+      <input
+        id="spot-search"
+        v-model="filters.query"
+        type="search"
+        placeholder="Водоем, град, риба..."
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="control-group">
       <label for="spot-type">Тип</label>
       <select id="spot-type" v-model="filters.type">
         <option value="all">Всички места</option>

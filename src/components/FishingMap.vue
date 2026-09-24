@@ -41,7 +41,7 @@ function renderSpots() {
   spotLayer.clearLayers();
   props.spots.forEach((spot) => {
     L.marker([spot.latitude, spot.longitude], { icon: spotIcon })
-      .bindTooltip(spot.name)
+      .bindTooltip(`${spot.waterBody.name} · ${spot.name}`)
       .on('click', () => emit('selectSpot', spot))
       .addTo(spotLayer as L.LayerGroup);
   });

@@ -6,7 +6,7 @@ export type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
 export type DataConfidence = 'sample' | 'needs_verification' | 'verified';
 
-export interface FishingSpot {
+export interface WaterBody {
   id: string;
   name: string;
   latitude: number;
@@ -18,18 +18,30 @@ export interface FishingSpot {
   nearestTown: string;
   fishSpecies: string[];
   techniques: string[];
-  facilities: string[];
   bestSeasons: string[];
-  accessNotes: string;
   permitNotes: string;
+  description: string;
+  photos: string[];
+}
+
+export interface FishingAccessPoint {
+  id: string;
+  waterBodyId: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  facilities: string[];
+  accessNotes: string;
   shoreAccess: string;
   nightFishing: boolean;
   boatAllowed: boolean;
   difficulty: DifficultyLevel;
   dataConfidence: DataConfidence;
   lastUpdated: string;
-  description: string;
-  photos: string[];
+}
+
+export interface FishingSpot extends FishingAccessPoint {
+  waterBody: WaterBody;
 }
 
 export interface FishingShop {
@@ -42,6 +54,7 @@ export interface FishingShop {
 }
 
 export interface SpotFilters {
+  query: string;
   type: SpotType | 'all';
   access: AccessType | 'all';
   showShops: boolean;

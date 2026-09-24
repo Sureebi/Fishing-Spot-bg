@@ -5,7 +5,7 @@ defineProps<{
   spot: FishingSpot | null;
 }>();
 
-const typeLabels: Record<FishingSpot['type'], string> = {
+const typeLabels: Record<FishingSpot['waterBody']['type'], string> = {
   reservoir: 'Язовир',
   lake: 'Езеро',
   river: 'Река',
@@ -29,17 +29,20 @@ const confidenceLabels: Record<FishingSpot['dataConfidence'], string> = {
 <template>
   <aside class="detail-panel" aria-live="polite">
     <template v-if="spot">
-      <img class="detail-image" :src="spot.photos[0]" :alt="spot.name" />
+      <img class="detail-image" :src="spot.waterBody.photos[0]" :alt="spot.waterBody.name" />
       <div class="detail-content">
-        <p class="eyebrow">{{ typeLabels[spot.type] }} · {{ spot.access === 'free' ? 'Свободен' : 'Платен' }}</p>
-        <h2>{{ spot.name }}</h2>
-        <p class="location-line">{{ spot.region }} · близо до {{ spot.nearestTown }}</p>
-        <p class="description">{{ spot.description }}</p>
+        <p class="eyebrow">
+          {{ typeLabels[spot.waterBody.type] }} · {{ spot.waterBody.access === 'free' ? 'Свободен' : 'Платен' }}
+        </p>
+        <h2>{{ spot.waterBody.name }}</h2>
+        <p class="access-point-name">{{ spot.name }}</p>
+        <p class="location-line">{{ spot.waterBody.region }} · близо до {{ spot.waterBody.nearestTown }}</p>
+        <p class="description">{{ spot.waterBody.description }}</p>
 
         <div class="quick-facts">
           <div class="fact">
             <span>Достъп</span>
-            <strong>{{ spot.access === 'free' ? 'Свободен' : 'Платен' }}</strong>
+            <strong>{{ spot.waterBody.access === 'free' ? 'Свободен' : 'Платен' }}</strong>
           </div>
           <div class="fact">
             <span>Трудност</span>
@@ -58,23 +61,23 @@ const confidenceLabels: Record<FishingSpot['dataConfidence'], string> = {
         <div class="detail-section">
           <h3>Риби</h3>
           <div class="tag-list">
-            <span v-for="species in spot.fishSpecies" :key="species">{{ species }}</span>
+            <span v-for="species in spot.waterBody.fishSpecies" :key="species">{{ species }}</span>
           </div>
         </div>
 
         <div class="detail-section">
           <h3>Подходящо за</h3>
           <div class="tag-list">
-            <span v-for="technique in spot.techniques" :key="technique">{{ technique }}</span>
+            <span v-for="technique in spot.waterBody.techniques" :key="technique">{{ technique }}</span>
           </div>
         </div>
 
         <div class="detail-section">
           <h3>Практична информация</h3>
           <dl class="info-list">
-            <div v-if="spot.price">
+            <div v-if="spot.waterBody.price">
               <dt>Цена</dt>
-              <dd>{{ spot.price }}</dd>
+              <dd>{{ spot.waterBody.price }}</dd>
             </div>
             <div>
               <dt>Достъп</dt>
@@ -86,7 +89,7 @@ const confidenceLabels: Record<FishingSpot['dataConfidence'], string> = {
             </div>
             <div>
               <dt>Правила</dt>
-              <dd>{{ spot.permitNotes }}</dd>
+              <dd>{{ spot.waterBody.permitNotes }}</dd>
             </div>
           </dl>
         </div>
@@ -101,7 +104,7 @@ const confidenceLabels: Record<FishingSpot['dataConfidence'], string> = {
         <div class="detail-section">
           <h3>Сезон</h3>
           <div class="tag-list neutral">
-            <span v-for="season in spot.bestSeasons" :key="season">{{ season }}</span>
+            <span v-for="season in spot.waterBody.bestSeasons" :key="season">{{ season }}</span>
           </div>
         </div>
 
